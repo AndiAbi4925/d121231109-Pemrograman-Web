@@ -1,0 +1,131 @@
+/* --- CSS VARIABLES (THEME) --- */
+:root {
+    --bg-color: #0f172a;
+    --text-color: #cbd5e1;
+    --primary-color: #2dd4bf;
+    --secondary-color: #1e293b;
+    --accent-color: #334155;
+    --font-main: 'Inter', sans-serif;
+}
+
+/* --- GENERAL & PAGE LOAD ANIMATION --- */
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.7;
+    padding: 20px;
+    /* This applies the smooth transition animation */
+    animation: fadeInAnimation 0.7s ease-in-out forwards;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    background-color: var(--secondary-color);
+    padding: 30px 40px;
+    border-radius: 10px;
+    border: 1px solid var(--accent-color);
+    opacity: 0; /* Start invisible for the animation */
+    /* This applies a slide-up effect along with the fade-in */
+    animation: fadeInUpAnimation 0.6s ease-in-out 0.3s forwards;
+}
+
+/* --- KEYFRAME ANIMATIONS FOR SMOOTH TRANSITION --- */
+@keyframes fadeInAnimation {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUpAnimation {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* --- HEADER --- */
+.page-header {
+    border-bottom: 1px solid var(--accent-color);
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.back-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: 20px;
+    transition: transform 0.3s;
+}
+
+.back-link:hover {
+    transform: translateX(-5px);
+}
+
+.experience-title {
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 50px;
+}
+
+
+/* --- MAIN CONTENT --- */
+.experience-image-container {
+    max-width: 700px;
+    margin: 0 auto 30px auto;
+}
+
+.experience-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    border: 2px solid var(--accent-color);
+}
+
+.details-content .period {
+    font-style: italic;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.details-content .description {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.achievements-heading {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    border-left: 3px solid var(--primary-color);
+    padding-left: 10px;
+}
+
+.details-content ul {
+    list-style: none;
+    padding-left: 15px;
+}
+
+.details-content li {
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.details-content li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+}
+
