@@ -22,9 +22,14 @@ html {
 body {
     font-family: var(--font-main);
     background-color: var(--bg-color);
+    background-image: url("gambar/bgPattern.png");
+    background-size: cover;      /* agar gambar menyesuaikan layar */
+    background-position: center; /* posisinya di tengah */
+    background-repeat: no-repeat; /* biar tidak ngulang */
     color: var(--text-color);
     line-height: 1.6;
 }
+
 
 .container {
     max-width: 1100px;
@@ -165,7 +170,6 @@ body {
     gap: 15px;
 }
 
-/* --- BUTTONS --- */
 .btn {
     display: inline-block;
     padding: 12px 24px;
@@ -197,8 +201,6 @@ body {
     color: var(--bg-color);
 }
 
-
-/* --- GENERAL SECTION STYLING --- */
 .section-heading {
     font-size: 2rem;
     font-weight: 700;
@@ -222,8 +224,6 @@ body {
     margin-left: 20px;
 }
 
-
-/* --- ABOUT SECTION --- */
 .about-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -331,6 +331,7 @@ body {
     padding: 30px 0;
     text-align: center;
     border-top: 1px solid var(--accent-color);
+    background-color: #0f172a;
 }
 .social-links {
     margin-bottom: 15px;
@@ -367,6 +368,7 @@ body {
 
 .experience-image {
     overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .experience-image img {
@@ -376,7 +378,6 @@ body {
     object-fit: cover;
     display: block;
     border-radius: 12px;
-    transition: transform 0.4s ease;
 }
 
 .experience-card {
