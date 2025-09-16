@@ -23,9 +23,9 @@ body {
     font-family: var(--font-main);
     background-color: var(--bg-color);
     background-image: url("gambar/bgPattern.png");
-    background-size: cover;      /* agar gambar menyesuaikan layar */
-    background-position: center; /* posisinya di tengah */
-    background-repeat: no-repeat; /* biar tidak ngulang */
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat; 
     color: var(--text-color);
     line-height: 1.6;
 }
@@ -76,7 +76,7 @@ body {
 }
 
 .desktop-nav {
-    display: none; /* Hidden on mobile */
+    display: none; /* biar hilang di tampilan mobil */
 }
 
 .nav-link {
