@@ -1,0 +1,11 @@
+{
+  "routes": [
+    { "src": "/", "dest": "porto.html" },
+    { "src": "/seminar-coder", "dest": "experience-Seminar-Coder.html" },
+    { "src": "/experience-gpm", "dest": "experience-gpm.html" },
+    { "src": "/experience-OC-JA", "dest": "experience-OC-JA.html" },
+    { "src": "/experience-ImpactCircle", "dest": "experience-ImpactCircle.html" },
+    { "src": "/experience-GDGoC1", "dest": "experience-GDGoC1.html" },
+    { "src": "/experience-abi-kitchen", "dest": "experience-abi-kitchen.html" }
+  ]
+}
