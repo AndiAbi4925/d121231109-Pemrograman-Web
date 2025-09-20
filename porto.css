@@ -452,14 +452,14 @@ body {
 }
 
 .cert-logo {
-    flex-shrink: 0; /* Prevents the logo from shrinking */
+    flex-shrink: 0;
 }
 
 .cert-logo img {
     width: 60px;
     height: 60px;
     border-radius: 8px;
-    background-color: #ffffff; /* Adds a background for logos with transparency */
+    background-color: #ffffff;
     padding: 5px;
 }
 
@@ -476,27 +476,25 @@ body {
 
 .cert-issuer, .cert-date {
     font-size: 0.9rem;
-    color: #94a3b8; /* slate-400 */
+    color: #94a3b8;
     margin-bottom: 3px;
 }
 
 .cert-link {
     display: inline-block;
     margin-top: 10px;
-    color: #2dd4bf; /* teal-400 */
+    color: #2dd4bf;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s;
 }
 
 .cert-link:hover {
-    color: #5eead4; /* a lighter teal */
+    color: #5eead4;
 }
 
-/* Responsive styles for larger screens */
 @media (min-width: 768px) {
     .certifications-grid {
-        /* Two columns on tablets and desktops */
         grid-template-columns: repeat(2, 1fr);
     }
 }
