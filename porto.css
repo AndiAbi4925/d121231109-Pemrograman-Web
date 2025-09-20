@@ -427,3 +427,76 @@ body {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
+/* --- CERTIFICATIONS SECTION STYLES --- */
+.certifications-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* One column on mobile */
+    gap: 25px;
+}
+
+.certification-card {
+    background-color: #1e293b; /* slate-800 */
+    border: 1px solid #334155; /* slate-700 */
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.certification-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.cert-logo {
+    flex-shrink: 0; /* Prevents the logo from shrinking */
+}
+
+.cert-logo img {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    background-color: #ffffff; /* Adds a background for logos with transparency */
+    padding: 5px;
+}
+
+.cert-details {
+    flex-grow: 1;
+}
+
+.cert-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.cert-issuer, .cert-date {
+    font-size: 0.9rem;
+    color: #94a3b8; /* slate-400 */
+    margin-bottom: 3px;
+}
+
+.cert-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #2dd4bf; /* teal-400 */
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.cert-link:hover {
+    color: #5eead4; /* a lighter teal */
+}
+
+/* Responsive styles for larger screens */
+@media (min-width: 768px) {
+    .certifications-grid {
+        /* Two columns on tablets and desktops */
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
