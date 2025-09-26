@@ -13,22 +13,18 @@ class PortfolioEnhancer {
         this.setupProgressBar();
     }
 
-    // Header scroll effects and scroll-to-top button
     setupScrollEffects() {
         const header = document.getElementById('header');
         const scrollTopBtn = document.getElementById('scrollTopBtn');
 
         window.addEventListener('scroll', () => {
             const currentScrollY = window.scrollY;
-
-            // Header background blur effect only
             if (currentScrollY > 50) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
             }
 
-            // Scroll to top button
             if (scrollTopBtn) {
                 if (currentScrollY > 300) {
                     scrollTopBtn.style.display = 'block';
@@ -46,7 +42,6 @@ class PortfolioEnhancer {
             this.updateProgressBar();
         });
 
-        // Scroll to top functionality
         if (scrollTopBtn) {
             scrollTopBtn.addEventListener('click', () => {
                 window.scrollTo({
