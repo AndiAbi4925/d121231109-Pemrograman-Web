@@ -11,6 +11,7 @@ class ExperiencePageEnhancer {
         this.setupProjectCardAnimations();
         this.setupProgressBar();
         this.setupPageAnimations();
+        this.setupImageStack();
     }
 
     // Theme synchronization with main page
@@ -155,6 +156,170 @@ class ExperiencePageEnhancer {
         }
     }
 
+    // Interactive image stack - drag to move to back
+    setupImageStack() {
+        const imageContainer = document.querySelector('.experience-image-container');
+        if (!imageContainer) return;
+
+        const images = Array.from(imageContainer.querySelectorAll('.experience-image'));
+        if (images.length === 0) return;
+
+        // Setup initial stacking
+        images.forEach((img, index) => {
+            img.style.position = 'absolute';
+            img.style.cursor = 'grab';
+            img.style.transition = 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            img.style.userSelect = 'none';
+            img.setAttribute('draggable', 'false');
+            img.style.maxWidth = '500px'; // Smaller image size
+            img.style.width = '100%';
+            
+            // Calculate stagger positions
+            const offset = index * 20;
+            img.style.zIndex = images.length - index;
+            img.style.transform = `translate(${offset}px, ${offset}px) rotate(${index * 1.5}deg)`;
+        });
+
+        // Make container relative and set height
+        imageContainer.style.position = 'relative';
+        imageContainer.style.height = `${images[0].offsetHeight + (images.length * 20) + 50}px`;
+        imageContainer.style.maxWidth = '500px';
+        imageContainer.style.margin = '0 auto 30px auto';
+
+        let isDragging = false;
+        let currentImage = null;
+        let startX, startY, startTransformX, startTransformY, currentRotation;
+
+        images.forEach((img, index) => {
+            // Mouse down - start dragging
+            img.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                currentImage = img;
+                currentImage.style.cursor = 'grabbing';
+                currentImage.style.transition = 'none';
+                
+                const transform = window.getComputedStyle(img).transform;
+                const matrix = new DOMMatrix(transform);
+                startTransformX = matrix.m41;
+                startTransformY = matrix.m42;
+                
+                // Extract current rotation
+                const currentTransform = img.style.transform;
+                const rotateMatch = currentTransform.match(/rotate\(([-\d.]+)deg\)/);
+                currentRotation = rotateMatch ? parseFloat(rotateMatch[1]) : 0;
+                
+                startX = e.clientX;
+                startY = e.clientY;
+                
+                // Bring to front while dragging
+                img.style.zIndex = images.length + 10;
+            });
+
+            // Touch support
+            img.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                currentImage = img;
+                currentImage.style.transition = 'none';
+                
+                const transform = window.getComputedStyle(img).transform;
+                const matrix = new DOMMatrix(transform);
+                startTransformX = matrix.m41;
+                startTransformY = matrix.m42;
+                
+                // Extract current rotation
+                const currentTransform = img.style.transform;
+                const rotateMatch = currentTransform.match(/rotate\(([-\d.]+)deg\)/);
+                currentRotation = rotateMatch ? parseFloat(rotateMatch[1]) : 0;
+                
+                const touch = e.touches[0];
+                startX = touch.clientX;
+                startY = touch.clientY;
+                
+                img.style.zIndex = images.length + 10;
+                e.preventDefault();
+            });
+        });
+
+        // Mouse move - drag image smoothly without rotation change
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging || !currentImage) return;
+            
+            const deltaX = e.clientX - startX;
+            const deltaY = e.clientY - startY;
+            
+            currentImage.style.transform = `translate(${startTransformX + deltaX}px, ${startTransformY + deltaY}px) rotate(${currentRotation}deg)`;
+        });
+
+        // Touch move
+        document.addEventListener('touchmove', (e) => {
+            if (!isDragging || !currentImage) return;
+            
+            const touch = e.touches[0];
+            const deltaX = touch.clientX - startX;
+            const deltaY = touch.clientY - startY;
+            
+            currentImage.style.transform = `translate(${startTransformX + deltaX}px, ${startTransformY + deltaY}px) rotate(${currentRotation}deg)`;
+        });
+
+        // Mouse up - send to back
+        const handleDragEnd = () => {
+            if (!isDragging || !currentImage) return;
+            
+            isDragging = false;
+            currentImage.style.cursor = 'grab';
+            currentImage.style.transition = 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            
+            // Move to back of stack
+            const currentIndex = images.indexOf(currentImage);
+            images.splice(currentIndex, 1);
+            images.push(currentImage);
+            
+            // Reposition all images
+            images.forEach((img, index) => {
+                const offset = index * 20;
+                img.style.zIndex = images.length - index;
+                img.style.transform = `translate(${offset}px, ${offset}px) rotate(${index * 1.5}deg)`;
+            });
+            
+            currentImage = null;
+        };
+
+        document.addEventListener('mouseup', handleDragEnd);
+        document.addEventListener('touchend', handleDragEnd);
+
+        this.addImageStackStyles();
+    }
+
+    addImageStackStyles() {
+        const style = document.createElement('style');
+        style.textContent = `
+            .experience-image-container .experience-image {
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                border: 3px solid var(--accent-color);
+            }
+            
+            .experience-image-container .experience-image:hover {
+                box-shadow: 0 15px 40px rgba(45, 212, 191, 0.2);
+                border-color: var(--primary-color);
+            }
+            
+            .experience-image-container .experience-image:active {
+                box-shadow: 0 20px 50px rgba(45, 212, 191, 0.3);
+            }
+            
+            @media (max-width: 768px) {
+                .experience-image-container {
+                    max-width: 100% !important;
+                }
+                
+                .experience-image-container .experience-image {
+                    max-width: 100% !important;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
     // Page load animations
     setupPageAnimations() {
         // Fade in content on page load
@@ -213,11 +378,6 @@ class ExperiencePageEnhancer {
                 overflow: hidden;
                 border-radius: 12px;
                 transition: transform 0.3s ease, box-shadow 0.3s ease;
-            }
-            
-            .experience-image-container:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 20px 40px rgba(0,0,0,0.2), 0 0 20px rgba(45, 212, 191, 0.2);
             }
             
             .back-link {
