@@ -183,7 +183,7 @@ class ExperiencePageEnhancer {
         // Make container relative and set height
         imageContainer.style.position = 'relative';
         imageContainer.style.height = `${images[0].offsetHeight + (images.length * 20) + 50}px`;
-        imageContainer.style.maxWidth = '500px';
+        imageContainer.style.maxWidth = '600px';
         imageContainer.style.margin = '0 auto 30px auto';
 
         let isDragging = false;
